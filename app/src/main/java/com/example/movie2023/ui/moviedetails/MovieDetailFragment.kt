@@ -8,7 +8,9 @@ import coil.load
 import com.example.movie2023.R
 import com.example.movie2023.application.AppConstants
 import com.example.movie2023.databinding.FragmentMovieDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private val args by navArgs<MovieDetailFragmentArgs>()

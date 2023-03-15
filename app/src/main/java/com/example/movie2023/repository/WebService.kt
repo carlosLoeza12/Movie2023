@@ -19,12 +19,12 @@ interface WebService {
     suspend fun getPopularMovies(@Query("api_key") apiKey: String): MovieList
 }
 
-object RetrofitClient {
-    val webService by lazy {
-        Retrofit.Builder()
-            .baseUrl(AppConstants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .client(AppConstants.okHttp.build())
-            .build().create(WebService::class.java)
-    }
-}
+//object RetrofitClient {
+//    val webService by lazy {
+//        Retrofit.Builder()
+//            .baseUrl(AppConstants.BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+//            .client(AppConstants.okHttp.build())
+//            .build().create(WebService::class.java)
+//    }
+//}

@@ -1,13 +1,15 @@
 package com.example.movie2023.presentation
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.example.movie2023.core.Result
 import com.example.movie2023.repository.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class MovieViewModel(private val repository: MovieRepository) : ViewModel(){
+@HiltViewModel
+class MovieViewModel @Inject constructor(private val repository: MovieRepository) : ViewModel(){
 
     fun fetchAllMovies() = liveData(Dispatchers.IO){
 
@@ -34,8 +36,8 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel(){
 
 }
 
-class MovieViewModelFactory(private val repo: MovieRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(MovieRepository::class.java).newInstance(repo)
-    }
-}
+//class MovieViewModelFactory(private val repo: MovieRepository) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        return modelClass.getConstructor(MovieRepository::class.java).newInstance(repo)
+//    }
+//}

@@ -4,32 +4,31 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.example.movie2023.R
 import com.example.movie2023.data.model.Movie
-import com.example.movie2023.data.remote.MovieDataSource
 import com.example.movie2023.databinding.FragmentMovieBinding
 import com.example.movie2023.presentation.MovieViewModel
-import com.example.movie2023.presentation.MovieViewModelFactory
-import com.example.movie2023.repository.MovieRepositoryImpl
-import com.example.movie2023.repository.RetrofitClient
 import  com.example.movie2023.core.Result
 import com.example.movie2023.ui.movie.adapters.MovieAdapter
 import com.example.movie2023.ui.movie.adapters.concat.PopularConcatAdapter
 import com.example.movie2023.ui.movie.adapters.concat.TopRatedConcatAdapter
 import com.example.movie2023.ui.movie.adapters.concat.UpComingConcatAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieFragment : Fragment(R.layout.fragment_movie), MovieAdapter.OnMovieClickListener {
 
     private lateinit var binding: FragmentMovieBinding
     private lateinit var concatAdapter: ConcatAdapter
+    private val viewModel by activityViewModels<MovieViewModel>()
 
-    private val viewModel by viewModels<MovieViewModel> {
-        MovieViewModelFactory(MovieRepositoryImpl(MovieDataSource(RetrofitClient.webService)))
-    }
+//    private val viewModel by viewModels<MovieViewModel> {
+//        MovieViewModelFactory(MovieRepositoryImpl(MovieDataSource(RetrofitClient.webService)))
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
