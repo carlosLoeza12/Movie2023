@@ -1,11 +1,16 @@
 package com.example.movie2023.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.movie2023.application.AppConstants
+import com.example.movie2023.data.local.AppDatabase
+import com.example.movie2023.data.local.MovieDao
 import com.example.movie2023.repository.WebService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,8 +33,26 @@ object AppModule {
             .client(AppConstants.okHttp.build())
             .build()
 
+
     @Singleton
     @Provides
     fun provideMovieService(retrofit: Retrofit): WebService = retrofit.create(WebService::class.java)
 
+
+    @Singleton
+    @Provides
+    fun provideRoomInstance(@ApplicationContext context: Context) : AppDatabase =
+        Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+        "movie_table"
+    ).build()
+
+    @Provides
+    @Singleton
+    fun provideMovieDao(appDatabase: AppDatabase): MovieDao = appDatabase.movieDao()
+
+    @Singleton
+    @Provides
+    fun provideContext(@ApplicationContext context: Context): Context = context
 }

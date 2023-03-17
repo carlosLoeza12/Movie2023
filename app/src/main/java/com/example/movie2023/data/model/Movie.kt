@@ -14,7 +14,6 @@ data class Movie(
     val adult: Boolean = false,
     val overview: String = "",
     val release_date: String = "",
-    val genre_ids: List<Int> = listOf(),
     val original_title: String = "",
     val original_language: String = "",
     val title: String = "",
@@ -22,5 +21,6 @@ data class Movie(
     val popularity: Double = 0.0,
     val vote_count: Int = -1,
     val video: Boolean = false,
-    val vote_average: Double = 0.0
+    val vote_average: Double = 0.0,
+    val movieType: String =""
 ): Parcelable
